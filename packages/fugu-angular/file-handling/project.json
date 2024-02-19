@@ -6,6 +6,9 @@
   "tags": [],
   "projectType": "library",
   "targets": {
+    "build-schematic": {
+      "command": "tsc --project packages/fugu-angular/file-handling/tsconfig.schematic.json"
+    },
     "build": {
       "executor": "@nx/angular:package",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
@@ -20,7 +23,8 @@
           "tsConfig": "packages/fugu-angular/file-handling/tsconfig.lib.json"
         }
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "production",
+      "dependsOn": ["build-schematic"]
     },
     "test": {
       "executor": "@nx/jest:jest",

@@ -3,5 +3,10 @@
   "dest": "../../../dist/packages/fugu-angular/file-handling",
   "lib": {
     "entryFile": "src/index.ts"
-  }
+  },
+  "assets": [
+    { "input": "src", "glob": "collection.json", "output": "" },
+    { "input": "src/schematic", "glob": "schema.json", "output": "schematic" },
+    { "input": "src/schematic", "glob": "index.js", "output": "schematic" }
+  ]
 }

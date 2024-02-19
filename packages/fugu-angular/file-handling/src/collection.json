@@ -1,0 +1,12 @@
+{
+  "schematics": {
+    "ng-add": {
+      "factory": "./schematic",
+      "description": "Add File Handling API support to a PWA.",
+      "schema": "./schematic/schema.json",
+      "private": true,
+      "hidden": true,
+      "save": true
+    }
+  }
+}
