@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
 import { posix } from 'path';
 import { Schema as FileHandlingOptions } from './schema';
@@ -28,10 +32,6 @@ describe('File Handling Schematic', () => {
     skipTests: false
   };
 
-  const pwaOptions = {
-    project: 'bar'
-  };
-
   beforeEach(async () => {
     appTree = await schematicRunner.runExternalSchematic(
       '@schematics/angular',
@@ -44,12 +44,9 @@ describe('File Handling Schematic', () => {
       appOptions,
       appTree
     );
-    appTree = await schematicRunner.runExternalSchematic(
-      '@angular/pwa',
-      'ng-add',
-      pwaOptions,
-      appTree
-    );
+
+    // Using @angular/pwa is not possible due to an ESM import within the schematic
+    appTree.create('/projects/bar/src/manifest.webmanifest', '{}');
   });
 
   it('should install wicg-web-app-launch types', async () => {
@@ -63,8 +60,9 @@ describe('File Handling Schematic', () => {
   it('should add the "file_handling" property to the manifest', async () => {
     const tree = await schematicRunner.runSchematic('ng-add', defaultOptions, appTree);
 
-    const manifest = tree.readJson('/projects/bar/src/manifest.webmanifest') as { file_handling: unknown[] };
+    const manifest = tree.readJson('/projects/bar/src/manifest.webmanifest') as { file_handlers: unknown[] };
 
-    expect(manifest.file_handling).toEqual([]);
+    console.log(manifest);
+    expect(manifest.file_handlers).toEqual([]);
   });
 });

@@ -1,5 +1,5 @@
 import { chain, Rule, SchematicsException } from '@angular-devkit/schematics';
-import { addDependency, readWorkspace } from '@schematics/angular/utility';
+import { addDependency, DependencyType, readWorkspace } from '@schematics/angular/utility';
 import { posix } from 'path';
 import { Schema as FileHandlingOptions } from './schema';
 
@@ -13,8 +13,6 @@ function addFileHandlersToWebApplicationManifest(manifestPath: string): Rule {
 
 export default function(options: FileHandlingOptions): Rule {
   return async (host) => {
-    // TODO: Install @angular/pwa if not installed?
-
     // Resolve project in workspace
     const workspace = await readWorkspace(host);
 
@@ -39,7 +37,7 @@ export default function(options: FileHandlingOptions): Rule {
     // TODO: Let user specify file extensions to add
 
     return chain([
-      addDependency('@types/wicg-web-app-launch', 'latest'),
+      addDependency('@types/wicg-web-app-launch', 'latest', {type: DependencyType.Dev}),
       addFileHandlersToWebApplicationManifest(manifestPath),
     ]);
   };
