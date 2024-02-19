@@ -5,7 +5,7 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": []
+    "types": ["wicg-web-app-launch"]
   },
   "exclude": [
     "src/**/*.spec.ts",
