@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@fugu-angular/file-handling": [
+        "packages/fugu-angular/file-handling/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
