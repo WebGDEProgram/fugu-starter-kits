@@ -7,7 +7,8 @@ import { posix } from 'path';
 import { Manifest } from './manifest';
 import { Schema as FileHandlingOptions } from './schema';
 
-const MANIFEST_LOCATION = '/projects/bar/src/manifest.webmanifest';
+const SOURCE_ROOT = '/projects/bar/src/';
+const MANIFEST_LOCATION = `${SOURCE_ROOT}manifest.webmanifest`;
 
 describe('File Handling Schematic', () => {
   const schematicRunner = new SchematicTestRunner(
@@ -104,6 +105,20 @@ describe('File Handling Schematic', () => {
         'image/png': ['.png'],
         'image/jpeg': ['.jpeg']
       }
+    }]);
+  });
+
+  it('should accept different manifest path', async () => {
+    const manifestPath = 'manifest.json';
+    const combinedManifestPath = `${SOURCE_ROOT}${manifestPath}`;
+    appTree.rename(MANIFEST_LOCATION, combinedManifestPath);
+
+    const tree = await schematicRunner.runSchematic('ng-add', { ...defaultOptions, manifestPath }, appTree);
+
+    const manifest = tree.readJson(combinedManifestPath) as Manifest;
+    expect(manifest.file_handlers).toEqual([{
+      action: '.',
+      accept: {}
     }]);
   });
 });

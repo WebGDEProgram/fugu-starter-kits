@@ -56,7 +56,7 @@ export default function(options: FileHandlingOptions): Rule {
 
     // Find web application manifest
     const projectSourcePath = project.sourceRoot ?? posix.join(project.root, 'src');
-    const manifestPath = posix.join(projectSourcePath, 'manifest.webmanifest');
+    const manifestPath = posix.join(projectSourcePath, options.manifestPath ?? 'manifest.webmanifest');
 
     if (!host.exists(manifestPath)) {
       throw new SchematicsException('Project does not contain a manifest.webmanifest file in its source root. Run "ng add @angular/pwa" to add PWA support.');

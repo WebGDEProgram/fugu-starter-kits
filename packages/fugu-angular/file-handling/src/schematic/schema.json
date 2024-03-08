@@ -15,6 +15,10 @@
       "type": "string",
       "description": "Comma-seprated list of file extensions the app should be registered for as an editing program.",
       "x-prompt": "Which file extension(s) would you like your app to register for? (comma-separated, e.g.: .docx, .doc)"
+    },
+    "manifestPath": {
+      "type": "string",
+      "description": "The path to the web application manifest, relative to the project source root."
     }
   },
   "required": []
