@@ -108,6 +108,18 @@ describe('File Handling Schematic', () => {
     }]);
   });
 
+  it('should fall back to generic media type for unregistered extension', async () => {
+    const tree = await schematicRunner.runSchematic('ng-add', { ...defaultOptions, extensions: '.hopefullyunregistered' }, appTree);
+
+    const manifest = tree.readJson(MANIFEST_LOCATION) as Manifest;
+    expect(manifest.file_handlers).toEqual([{
+      action: '.',
+      accept: {
+        'application/x.hopefullyunregistered': ['.hopefullyunregistered']
+      }
+    }]);
+  });
+
   it('should accept different manifest path', async () => {
     const manifestPath = 'manifest.json';
     const combinedManifestPath = `${SOURCE_ROOT}${manifestPath}`;

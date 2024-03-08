@@ -1,16 +1,19 @@
-import { chain, Rule, SchematicsException } from '@angular-devkit/schematics';
+import { chain, Rule, SchematicContext, SchematicsException } from '@angular-devkit/schematics';
 import { addDependency, DependencyType, readWorkspace } from '@schematics/angular/utility';
 import { lookup } from 'mime-types';
 import { posix } from 'path';
 import { Manifest } from './manifest';
 import { Schema as FileHandlingOptions } from './schema';
 
-function getAcceptMap(extensions: string, acceptMap: Record<string, string[]> = {}): Record<string, string[]> {
+function getAcceptMap(extensions: string, acceptMap: Record<string, string[]>, context: SchematicContext): Record<string, string[]> {
   normalizeExtensions(extensions).forEach((extension) => {
-    const mediaType = lookup(extension);
+    let mediaType = lookup(extension);
 
     if (!mediaType) {
-      throw new SchematicsException(`Media type not found for extension: ${extension}`);
+      mediaType = `application/x${extension}`.toLowerCase();
+      context.logger.warn(`No officially registered media type found for extension: ${extension}.`);
+      context.logger.warn(`An unregistered media type was added: ${mediaType}.`);
+      context.logger.warn(`Please adjust the media type in case there is an official one, or register your extension.`);
     }
 
     if (acceptMap[mediaType]) {
@@ -71,12 +74,12 @@ export default function(options: FileHandlingOptions): Rule {
       context.logger.warn('A web application manifest with a "file_handlers" already exists.');
       context.logger.warn('The file extension(s) will be added to the accept object of the first file handler.');
       const [firstFileHandler] = manifest.file_handlers;
-      firstFileHandler.accept = getAcceptMap(extensions, firstFileHandler.accept);
+      firstFileHandler.accept = getAcceptMap(extensions, firstFileHandler.accept, context);
     } else {
       // File handlers do not exist, create property
       manifest.file_handlers = [{
         action: '.',
-        accept: getAcceptMap(extensions)
+        accept: getAcceptMap(extensions, {}, context)
       }];
     }
 
