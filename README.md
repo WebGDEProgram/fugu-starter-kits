@@ -1,9 +1,7 @@
 # Project Fugu Starter Kits 🐡
 
-|                                                                                        | Team                                    | Project interest                                                              | File Handling | Web Share Target | Launch Handler | Shortcuts |
-|----------------------------------------------------------------------------------------|-----------------------------------------|---------------------------------------------------------------------|---------------|------------------|----------------|-----------|
-| [Angular CLI](https://github.com/angular/angular-cli)/[Nx](https://github.com/nrwl/nx) | @christianliebel @SanderElias @yjaaidi  | Contributions to `@angular/pwa` not welcome, needs to be a separate package |               |                  |                |           |
-| [create-react-app](https://github.com/facebook/create-react-app)                       | @JamesLMilner @nico-martin @studioswong | ?                                                                   |               |                  |                |           |
-| [PWA Starter](https://github.com/pwa-builder/pwa-starter)                              |                                         | Contributions welcome                                                        |               |                  |                | ✅         |
-| [vite-plugin-pwa](https://github.com/vite-pwa/vite-plugin-pwa)                         |                                         | ?                                                                   |               |                  |                |           |
-| [Lit](https://github.com/lit/lit)                                                      | @kenchris @larsgk                       | ?                                                                   |               |                  |                |           |
+This repository contains starter kits for Project Fugu.
+
+## `@fugu-angular/file-handling`
+
+This is a schematic for adding File Handling support to an Angular PWA project. [Learn more…](./packages/fugu-angular/file-handling)
