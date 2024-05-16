@@ -1,6 +1,15 @@
 {
   "name": "@fugu-angular/file-handling",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebGDEProgram/fugu-starter-kits.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WebGDEProgram/fugu-starter-kits/issues"
+  },
+  "homepage": "https://github.com/WebGDEProgram/fugu-starter-kits#readme",
   "peerDependencies": {
     "@angular/common": "^17.1.0",
     "@angular/core": "^17.1.0",
